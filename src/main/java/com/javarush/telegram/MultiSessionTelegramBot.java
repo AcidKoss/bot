@@ -327,18 +327,41 @@ public class MultiSessionTelegramBot extends TelegramLongPollingBot {
 
 
     private <T extends Serializable, Method extends BotApiMethod<T>> T executeTelegramApiMethod(Method method) {
+
+            return sendApiMethodLog(method);
+
+    }
+
+    private Message executeTelegramApiMethod(SendPhoto message) {
+
+            return executeLog(message);
+
+    }
+
+
+    public Message executeLog (SendPhoto message) {
         try {
-            return super.sendApiMethod(method);
+            log.info("Отправка запроса: {}", message);
+            Message response = super.execute(message);
+            log.info("Ответ Telegram API: {}", response);
+            return response;
         } catch (TelegramApiException e) {
+            log.error("Ошибка при execute(): ", e);
             throw new RuntimeException(e);
         }
     }
 
-    private Message executeTelegramApiMethod(SendPhoto message) {
+    public <T extends Serializable> T sendApiMethodLog(BotApiMethod<T> method) {
         try {
-            return super.execute(message);
+            log.info("Отправка API метода: {}", method);
+            T response = super.sendApiMethod(method);
+            log.info("Ответ API: {}", response);
+            return response;
         } catch (TelegramApiException e) {
+            log.error("Ошибка при sendApiMethod(): ", e);
             throw new RuntimeException(e);
         }
     }
+
+
 }
