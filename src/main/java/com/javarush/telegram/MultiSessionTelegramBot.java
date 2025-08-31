@@ -112,7 +112,6 @@ public class MultiSessionTelegramBot extends TelegramLongPollingBot {
         long underscoreCount = text != null ? text.chars().filter(c -> c == '_').count() : 0;
         if (underscoreCount % 2 == 0) {
             SendMessage command = createApiSendMessageCommand(String.valueOf(text));
-            log.debug("Метод sendTextMessage " + text);
             return executeTelegramApiMethod(command);
         } else {
             var message = "Строка '%s' является невалидной с точки зрения markdown. Воспользуйтесь методом sendHtmlMessage()".formatted(text);

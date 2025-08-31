@@ -25,17 +25,12 @@ public class TinderBoltApp extends MultiSessionTelegramBot {
     public void onUpdateEventReceived(Update update) {
 
         sendTextMessage("Привет");
+        sendTextButtonsMessage("Твои кнопки", "Кнопка1","/button1", "Кнопка2","/button2");
+        sendPhotoTextMessage("main", "Чат бот");
 
     }
 
     public static void main(String[] args) throws TelegramApiException {
-        SLF4JBridgeHandler.removeHandlersForRootLogger();
-        SLF4JBridgeHandler.install();
-
-        java.util.logging.Logger telegramLogger =
-                java.util.logging.Logger.getLogger("org.telegram");
-        telegramLogger.setLevel(java.util.logging.Level.ALL);
-
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
         telegramBotsApi.registerBot(new TinderBoltApp());
     }
