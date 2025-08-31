@@ -24,7 +24,7 @@ public class TinderBoltApp extends MultiSessionTelegramBot {
     @Override
     public void onUpdateEventReceived(Update update) {
 
-        sendTextMessage("Привет");
+        sendTextMessage("Привет ");
 
     }
 
