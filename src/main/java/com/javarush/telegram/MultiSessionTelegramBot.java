@@ -341,9 +341,9 @@ public class MultiSessionTelegramBot extends TelegramLongPollingBot {
 
     public Message executeLog (SendPhoto message) {
         try {
-            log.info("Отправка запроса: {}", message);
+            log.info("Отправка запроса с фото: {}", message);
             Message response = super.execute(message);
-            log.info("Ответ Telegram API: {}", response);
+            log.info("Ответ API: {}", response);
             return response;
         } catch (TelegramApiException e) {
             log.error("Ошибка при execute(): ", e);
@@ -353,7 +353,7 @@ public class MultiSessionTelegramBot extends TelegramLongPollingBot {
 
     public <T extends Serializable> T sendApiMethodLog(BotApiMethod<T> method) {
         try {
-            log.info("Отправка API метода: {}", method);
+            log.info("Отправка запроса: {}", method);
             T response = super.sendApiMethod(method);
             log.info("Ответ API: {}", response);
             return response;
