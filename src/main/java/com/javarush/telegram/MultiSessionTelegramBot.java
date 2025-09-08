@@ -326,7 +326,7 @@ public class MultiSessionTelegramBot extends TelegramLongPollingBot {
     }
 
 
-    private <T extends Serializable, Method extends BotApiMethod<T>> T executeTelegramApiMethod(Method method) {
+    <T extends Serializable, Method extends BotApiMethod<T>> T executeTelegramApiMethod(Method method) {
 
             return sendApiMethodLog(method);
 

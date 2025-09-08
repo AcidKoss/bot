@@ -4,6 +4,8 @@ import com.plexpt.chatgpt.ChatGPT;
 import com.plexpt.chatgpt.entity.chat.ChatCompletion;
 import com.plexpt.chatgpt.entity.chat.ChatCompletionResponse;
 import com.plexpt.chatgpt.entity.chat.Message;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -15,6 +17,7 @@ public class ChatGPTService {
     private ChatGPT chatGPT;
 
     private List<Message> messageHistory = new ArrayList<>(); //История переписки с ChatGPT - нужна для диалогов
+    private static final Logger log = LoggerFactory.getLogger(ChatGPTService.class);
 
     public ChatGPTService(String token) {
         this.chatGPT = ChatGPT.builder()
@@ -73,6 +76,8 @@ public class ChatGPTService {
         ChatCompletionResponse response = chatGPT.chatCompletion(chatCompletion);
         Message res = response.getChoices().get(0).getMessage();
         messageHistory.add(res);
+
+        log.debug("Сообщение после отправки" + messageHistory);
 
         return res.getContent();
     }
